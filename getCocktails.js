@@ -19,7 +19,7 @@ resultGrid = document.getElementById("result-grid");
 resultMessage = document.getElementById("result-message");
 
 
-function getCocktailsByTitle() {
+function getCocktailsByName() {
 
     if (searchbar.value === "") {
         alert("Error : you don't specify any term to search. Please retry !");
@@ -29,7 +29,7 @@ function getCocktailsByTitle() {
         document.getElementById("result-grid").innerHTML = "";
         resultMessage.innerHTML = "Loading...";
 
-        fetch("www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita" + searchbar.value +
+        fetch("http://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita" + searchbar.value +
             {method: "GET", headers: {"Content-type": "application/json; charset=UTF-8"}})
             .then(response => response.json())
             .then(listCocktails => {
