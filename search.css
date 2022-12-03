@@ -1,0 +1,359 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: Calibri;
+    background-color: black;
+    color: white;
+}
+
+
+@font-face {
+    font-family: Hunters;
+    src: url("fonts/Hunters.otf");
+}
+
+#switcher-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: #28314d;
+    width: 16%;
+    height: 2em;
+    border: solid #ffffff 1px;
+    border-radius: 20px;
+    position: absolute;
+    left: 2%;
+    top: 2%;
+}
+
+#switcher-container:hover {
+    background-color: #386775;
+    cursor: pointer;
+    scale: 110%;
+}
+
+#switcher-container:hover  #switcher-icon {
+    transition: ease 0.7s;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+#switcher-text{
+    display: inline-block;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 0.9em;
+    color: white;
+    font-weight: bold;
+}
+
+#switcher-icon {
+    position: relative;
+    height: 100%;
+    display: inline-block;
+}
+
+
+
+#back-button {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: #28314d;
+    width: 15%
+;
+    height: 2em;
+    border: solid #ffffff 1px;
+    border-radius: 20px;
+    position: absolute;
+    right: 2%;
+    top: 2%;
+}
+
+#back-button:hover {
+    background-color: #386775;
+    cursor: pointer;
+    scale: 110%;
+}
+
+#back-button:hover  #switcher-icon {
+    transition: ease 0.7s;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+#back-button-text{
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+    font-size: 0.9em;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#back-button-icon {
+    position: relative;
+    height: 100%;
+    display: inline-block;
+}
+.button-text-color {
+    color: #8098a9;
+}
+
+#banner-container {
+    object-fit: fill;
+    width: 100%;
+    height: 30vh;
+    background: url("images/bar.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+#banner-title {
+    font-family: Hunters;
+    transform: translateY(60%);
+    height: 50%;
+    width: 100%;
+    letter-spacing: 0.1em;
+    text-align: center;
+    color: white;
+    font-size: 5em;
+    font-weight: bold;
+}
+
+#search-bar-container {
+    transform: translateY(-50%);
+    width: 100%;
+    height: 2em;
+}
+
+#search-bar {
+    float: left;
+    height: 100%;
+    width: 70%;
+    border : 3px solid black;
+    border-right: none;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    margin-left: 10%;
+    padding-left: 2%;
+    background-color: white;
+}
+
+#search-button {
+    float: left;
+    width: 5%;
+    height: 120%;
+    cursor: pointer;
+    border:  3px solid black;
+    border-left: 1px solid black;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+#search-button:hover {
+    background-color: grey;
+}
+
+#result-container {
+    min-height: 80vh;
+    height: fit-content;
+    width: 100%;
+}
+
+#result-message {
+    clear: both;
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+#result-grid {
+    margin-top: 3%;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 33% 34% 33%;
+}
+
+
+.result-element {
+    margin: 10%;
+    width: 80%;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.result-element:hover {
+    scale: 105%;
+}
+.result-element-image-container {
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 7em;
+}
+
+.result-element-image:hover {
+    cursor: pointer;
+    opacity: 70%;
+}
+
+.result-element-image {
+    height: 100%;
+}
+
+
+#result-grid p {
+    width: 96%;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-top: 2%;
+    margin-bottom: 4%;
+    overflow: hidden;
+}
+.result-element-title {
+    font-weight: bold;
+    font-size: 1.1em;
+    text-align: center;
+    animation: append-fadein .3s linear ;
+}
+
+
+.result-element-subjects-container {
+    padding-left: 2%;
+    width: 96%;
+    padding-right: 2%;
+    font-size: 0.9em;
+    height: fit-content;
+}
+.result-element-subjects {
+    width: fit-content;
+    display: inline-block;
+    color: grey;
+    animation: append-fadein .4s linear ;
+}
+
+.result-element-subjects:visited {
+    color: #4b4949;
+}
+
+.result-element-subjects:hover {
+    color: saddlebrown;
+}
+
+.result-element-subjects:active {
+    color: saddlebrown;
+}
+
+
+.result-element-highlights {
+    font-size: 0.9em;
+    color: grey;
+    font-style: italic;
+    animation: append-fadein .4.5s linear ;
+}
+
+.coloredBold {
+    color: #125d7a;
+    font-weight: bold;
+}
+.colored {
+    color: #125d7a;
+}
+.result-element-legend {
+    margin-top: 2%;
+    width: 100%;
+    text-align: center;
+    color: black;
+    padding-bottom: 5%;
+}
+
+
+footer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 60px;
+    background-color: #2f2620;
+
+}
+
+#footer-text {
+    height: fit-content;
+    text-align: center;
+    color: grey;
+    width: 100%;
+    margin: auto;
+}
+
+
+
+@keyframes append-fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@media screen and (max-width: 950px) {
+
+    #switcher-container {
+        width: 23%
+    }
+    #result-grid {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+}
+
+
+@media screen and (max-width: 750px) {
+
+    #switcher-container {
+        width: 26%
+    }
+
+    #result-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    #search-bar {
+        width: 65%;
+
+    }
+
+    #search-button {
+        width: 10%;
+    }
+
+}
+
+
+@media screen and (max-width: 550px) {
+
+    #switcher-container {
+        width: 30%
+    }
+    #banner-title {
+        font-size: 3.0em;
+    }
+    #result-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

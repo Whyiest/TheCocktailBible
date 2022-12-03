@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="search.css">
+    <title>Search | The Cocktail Bible</title>
+</head>
+<body>
+
+
+<section id="banner">
+    <div id="banner-container">
+        <div id="switcher-container" onclick="switchSearch(searchState)">
+            <p id="switcher-text">Search by <span class="button-text-color">name</span></p>
+            <img id="switcher-icon" src="images/switch-icon-white.png" alt="switch arrow">
+        </div>
+        <p id="banner-title">Search</p>
+
+        <div id="back-button">
+            <a id="back-button-text" href="index.html">Go back to <span class="button-text-color">menu</span></a>
+            <img id="back-button-icon" src="images/left-arrow-black.svg" alt="back arrow">
+        </div>
+    </div>
+
+</section>
+
+<section id="result">
+    <form id="search-bar-container">
+        <input name="search-field" id="search-bar" placeholder="Search a cocktail">
+        <button name="search-button" id="search-button" type="button" onclick="getCocktails()"><i
+                class="fa fa-search"></i>
+        </button>
+    </form>
+
+    <div id="result-container">
+        <p id="result-message">Press search to find a cocktail</p>
+        <div id="result-grid">
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
