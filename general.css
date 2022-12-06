@@ -1,0 +1,89 @@
+@font-face {
+    font-family: Hunters;
+    src: url("fonts/Hunters.otf");
+}
+
+@font-face {
+    font-family: BillonDreams;
+    src: url("fonts/BillionDreams_PERSONAL.ttf");
+}
+
+@font-face {
+    font-family: Mulish;
+    src: url("fonts/Mulish.ttf");
+}
+
+@font-face {
+    font-family: Lovelo;
+    src: url("fonts/LoveloBlack.otf");
+}
+
+navbar {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 4em;
+    background-color: black;
+}
+
+#nav-list {
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    height: 100%;
+    width: 100%;
+    list-style: none;
+}
+
+.nav-element {
+    margin-left: 5%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.nav-link {
+    font-size: 1.1em;
+    font-weight: bold;
+    font-family: Mulish;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    scale: 105%;
+    color: cornflowerblue;
+}
+
+
+.colored-text {
+    color: #48e38b;
+}
+
+.fa-house-chimney {
+    height: 90%;
+    color: white;
+}
+@media screen and (max-width: 950px) {
+
+}
+
+
+@media screen and (max-width: 750px) {
+
+    #nav-list {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 550px) {
+
+    .nav-element {
+        margin-left: 2%
+    }
+
+    .nav-link {
+        font-size: 0.9em;
+    }
+
+}

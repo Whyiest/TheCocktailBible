@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="random.css">
+    <title>Random | The Cocktail Bible</title>
+    <script src="https://kit.fontawesome.com/5edb51746c.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<navbar>
+  <ul id = nav-list>
+    <li class="nav-element"><a class="nav-link" href="index.html"><i class="fa-solid fa-house-chimney"></i>&nbsp;Home</a></li>
+    <li class="nav-element"><a class="nav-link" href="search.html">Name</a></li>
+    <li class="nav-element"><a class="nav-link" href="#">Ingredients</a></li>
+    <li class="nav-element"><a class="nav-link" href="random.html">Random</a></li>
+    <li class="nav-element"><a class="nav-link" href="#">Contact</a></li>
+  </ul>
+</navbar>
+
+<section id="random">
+
+    <p id="random-text">Find <span class="colored-text">random</span> cocktail</p>
+    <p id="random-message">Search a cocktail with the field above !</p>
+
+    <div id="random-container"onclick="getRandomCocktails()">
+        <div id="random-empty-result"></div>
+    </div>
+
+    <script src="getRandomCocktail.js"></script>
+</section>
+</body>
+</html>

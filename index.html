@@ -1,33 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>The Cocktail Bible</title>
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="general.css">
+
+    <!-- Dev Note : Font Awesome linked with Why account. Don't reuse on others projects -->
+    <script src="https://kit.fontawesome.com/5edb51746c.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
 <navbar>
-    <ul id = nav-list>
-        <li class="nav-element"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-element"><a class="nav-link" href="#">Search</a></li>
+    <ul id=nav-list>
+        <li class="nav-element"><a class="nav-link" href="index.html"><i class="fa-solid fa-house-chimney"></i>&nbsp;Home</a></li>
+        <li class="nav-element"><a class="nav-link" href="search.html">Name</a></li>
+        <li class="nav-element"><a class="nav-link" href="#">Ingredients</a></li>
+        <li class="nav-element"><a class="nav-link" href="random.html">Random</a></li>
         <li class="nav-element"><a class="nav-link" href="#">Contact</a></li>
     </ul>
 </navbar>
 
-
 <section id="home">
-
     <div id="home-grid">
-        <div id="home-text-container">
-            <h1 id="home-text">The <span class="colored-text">Coktail</span> Bible</h1>
-            <div id="home-button-container">
-                <a id="home-page-link" href="search.html">Search a cocktail</a>
+        <div id="home-text-column">
+            <h1 id="home-text">The <span class="colored-text">Cocktail</span> Bible</h1>
+            <div id="home-button-search">
+                <p id="home-button-search-text" href="search.html">By Esteban & Thomas</p>
             </div>
         </div>
 
+        <div id="home-button-column">
+            <div id="home-button-container">
+                <div class="home-button-byingredient home-button">
+                    <a id="home-button-byingredient-text" href="search.html">Search by name&nbsp; <i class="fa-solid fa-spell-check"></i></a>
+                </div>
+                <div class="home-button-byname home-button">
+                    <a id="home-button-byname-text" href="ingredients.html">Search by ingredient&nbsp; <i class="fa-solid fa-lemon"></i></a>
+                </div>
+                <div class="home-button-random home-button">
+                    <a id="home-button-random-text" href="random.html">Random cocktail ?&nbsp; <i class="fa-solid fa-dice"></i></a>
+                </div>
+            </div>
+
+        </div>
     </div>
 </section>
+
 </body>
 </html>

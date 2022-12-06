@@ -4,7 +4,7 @@ let searchBarText = document.getElementById("search-bar");
 let searchButton = document.getElementById("search-button");
 
 let searchState = new Array(1);
-searchState[0] = 0;
+searchState[0] = 1;
 // 0 = Search by name
 // 1 = Search by ingredient
 

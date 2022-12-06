@@ -2,8 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="general.css">
     <link rel="stylesheet" href="search.css">
     <title>Search | The Cocktail Bible</title>
+    <!-- Dev Note : Font Awesome linked with Why account. Don't reuse on others projects -->
+    <script src="https://kit.fontawesome.com/5edb51746c.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
@@ -17,8 +21,9 @@
         <p id="banner-title">Search</p>
 
         <div id="back-button">
-            <a id="back-button-text" href="index.html">Go back to <span class="button-text-color">menu</span></a>
-            <img id="back-button-icon" src="images/left-arrow-black.svg" alt="back arrow">
+            <a id="back-button-text" href="index.html"> <i class="fa-solid fa-circle-chevron-left"></i>&nbsp;&nbsp;Go back to <span class="button-text-color">menu</span></a>
+
+            <!--<img id="back-button-icon" src="images/left-arrow-black.svg" alt="back arrow">-->
         </div>
     </div>
 
@@ -26,20 +31,20 @@
 
 <section id="result">
     <form id="search-bar-container">
-        <input name="search-field" id="search-bar" placeholder="Search a cocktail">
+        <input name="search-field" id="search-bar" placeholder="Search a cocktail by name">
         <button name="search-button" id="search-button" type="button" onclick="getCocktailsByName()"><i
                 class="fa fa-search"></i>
         </button>
     </form>
 
     <div id="result-container">
-        <p id="result-message">Press search to find a cocktail</p>
+        <p id="result-message">Click to display random cocktail !</p>
         <div id="result-grid">
         </div>
     </div>
 </section>
 
-<script src="getCocktails.js"></script>
+<script src="getCocktail.js"></script>
 <script src="switchSearch.js"></script>
 </body>
 </html>
