@@ -1,6 +1,6 @@
 Our group project is named : The Cocktail Bible
 
-Hosting link : ....
+Hosting link : https://thecocktailbible.netlify.app/
 
 On this website you will be able to find all the cocktails that exist as well as their category,
 their ingredients, instructions for preparation and tutorial videos if they exist.
