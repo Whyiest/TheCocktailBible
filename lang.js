@@ -19,7 +19,7 @@ function randomActive() {
 }
 
 function translateHomeFr() {
-    document.getElementById("nav-list").innerHTML = "<li class=\"nav-element\"><a class=\"nav-link\" href=\"index.html\"><i class=\"fa-solid fa-house-chimney\"></i>&nbsp;Accueil</a></li>"
+    document.getElementById("nav-list").innerHTML = "<li class=\"nav-element hide-mobile\"><a class=\"nav-link\" href=\"index.html\"><i class=\"fa-solid fa-house-chimney\"></i>&nbsp;Accueil</a></li>"
         + "<li class=\"nav-element\"><a class=\"nav-link\" href=\"search.html\">Nom</a></li>"
         + "<li class=\"nav-element\"><a class=\"nav-link\" href=\"search.html?s=ingredient\">Ingredients</a></li>"
         + "<li class=\"nav-element\"><a class=\"nav-link\" href=\"random.html\">Aléatoire</a></li>"
@@ -33,7 +33,7 @@ function translateHomeFr() {
 }
 
 function translateHomeEn() {
-    document.getElementById("nav-list").innerHTML = "<li class=\"nav-element\"><a class=\"nav-link\" href=\"index.html\"><i class=\"fa-solid fa-house-chimney\"></i>&nbsp;Home</a></li>"
+    document.getElementById("nav-list").innerHTML = "<li class=\"nav-element hide-mobile\"><a class=\"nav-link\" href=\"index.html\"><i class=\"fa-solid fa-house-chimney\"></i>&nbsp;Home</a></li>"
         + "<li class=\"nav-element\"><a class=\"nav-link\" href=\"search.html\">Name</a></li>"
         + "<li class=\"nav-element\"><a class=\"nav-link\" href=\"search.html?s=ingredient\">Ingredients</a></li>"
         + "<li class=\"nav-element\"><a class=\"nav-link\" href=\"random.html\">Random</a></li>"
@@ -49,7 +49,7 @@ function translateRandomEn() {
     document.getElementById("nav-list").innerHTML = "<li class=\"nav-element\"><a class=\"nav-link\" href=\"index.html\"><i class=\"fa-solid fa-house-chimney\"></i>&nbsp;Home</a></li>"
         + "<li class=\"nav-element\"><a class=\"nav-link\" href=\"search.html\">Name</a></li>"
         + "<li class=\"nav-element\"><a class=\"nav-link\" href=\"search.html?s=ingredient\">Ingredients</a></li>"
-        + "<li class=\"nav-element\"><a class=\"nav-link\" href=\"random.html\">Random</a></li>"
+        + "<li class=\"nav-element hide-mobile\"><a class=\"nav-link\" href=\"random.html\">Random</a></li>"
         + "<li class=\"nav-element\"><a class=\"nav-link\" href=\"mailto:contact@cocktail.bible.com\">Contact</a></li>"
     document.getElementById("random").innerHTML = " <p id=\"random-text\">Find <span class=\"colored-text\">Random</span> cocktail</p><p id=\"random-message\">Search a cocktail with the field above !</p><div id=\"random-container\"onclick=\"getRandomCocktails()\"><div id=\"random-empty-result\"></div></div>"
     localStorage.setItem('lang', 'en')
@@ -59,7 +59,7 @@ function translateRandomFr() {
     document.getElementById("nav-list").innerHTML = "<li class=\"nav-element\"><a class=\"nav-link\" href=\"index.html\"><i class=\"fa-solid fa-house-chimney\"></i>&nbsp;Accueil</a></li>"
         + "<li class=\"nav-element\"><a class=\"nav-link\" href=\"search.html\">Nom</a></li>"
         + "<li class=\"nav-element\"><a class=\"nav-link\" href=\"search.html?s=ingredient\">Ingredients</a></li>"
-        + "<li class=\"nav-element\"><a class=\"nav-link\" href=\"random.html\">Aléatoire</a></li>"
+        + "<li class=\"nav-element hide-mobile\"><a class=\"nav-link\" href=\"random.html\">Aléatoire</a></li>"
         + "<li class=\"nav-element\"><a class=\"nav-link\" href=\"mailto:contact@cocktail.bible.com\">Contactez-nous</a></li>"
 
 
