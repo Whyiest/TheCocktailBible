@@ -48,13 +48,13 @@ h1 {
 }
 
 
-.home-button-byingredient {
+.home-button-byname {
     display: flex;
     justify-content: center;
     background: #092c3b;
 }
 
-#home-button-byingredient-text {
+#home-button-byname-text {
     margin: auto;
     width: fit-content;
     font-weight: bold;
@@ -63,7 +63,7 @@ h1 {
     text-align: center;
 }
 
-.home-button-byingredient:hover {
+.home-button-byname:hover {
     display: flex;
     justify-content: center;
     background-color: #02282f;
@@ -71,13 +71,13 @@ h1 {
     transition: ease 0.4s;
 }
 
-.home-button-byname {
+.home-button-byingredient {
     display: flex;
     justify-content: center;
     background-color: #301070;
 }
 
-#home-button-byname-text {
+#home-button-byingredient-text {
     width: fit-content;
     margin: auto;
     font-weight: bold;
@@ -85,7 +85,7 @@ h1 {
     text-decoration: none;
 }
 
-.home-button-byname:hover {
+.home-button-byingredient:hover {
     background-color: #1e0642;
     scale: 105%;
     transition: ease 0.4s;
@@ -240,7 +240,15 @@ h1 {
     #home-button-container {
         width: 50%;
     }
-
+    #home-button-byingredient-text {
+        font-size: 0.8em;
+    }
+    #home-button-byname-text {
+        font-size: 0.8em;
+    }
+    #home-button-random-text {
+        font-size: 0.8em;
+    }
 }
 
 

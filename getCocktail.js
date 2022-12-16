@@ -4,6 +4,11 @@ let resultMessage; // Link to the message under the search bar
 let resultNumber; // Show the number of result found
 let displayResult; // Store how many cocktail are displayed
 
+
+
+// ERROR TO PATCH (14/12/2022) : getCocktail.js:49 Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'strDrinkThumb')
+
+
 // Linking elements at general scope :
 searchbar = document.getElementById('search-bar');
 resultGrid = document.getElementById("result-grid");
@@ -12,11 +17,11 @@ resultMessage = document.getElementById("result-message");
 
 function getCocktailsByName() {
 
-    let imagePath, name, category, alcohol, glass, ingredients, instruction, measure;
+    let imagePath, name, category, alcohol, glass, ingredients, instruction, measure, linkVideo;
 
     ingredients = [];
 
-    fetch("http://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + searchbar.value)
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + searchbar.value)
         .then(response => response.json())
         .then(listCocktails => {
 
@@ -71,7 +76,12 @@ function getCocktailsByName() {
                     }
 
                     instruction = listCocktails.drinks[currentCocktail].strInstructions;
-                    addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients, instruction, measure);
+
+                    linkVideo = listCocktails.drinks[currentCocktail].strVideo;
+
+                    // Create the cocktail
+                    addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients, instruction, measure, linkVideo);
+
 
                 }
             }
@@ -81,11 +91,18 @@ function getCocktailsByName() {
 
 function getCocktailsByID(cocktailID) {
 
-
-    let imagePath, name, category, alcohol, glass, ingredients, instruction, measure;
+    let imagePath = null;
+    let name = null;
+    let category = null;
+    let alcohol = null;
+    let glass = null;
+    let ingredients = null;
+    let instruction = null;
+    let measure = null;
+    let indexToLookup = 0
     ingredients = [];
 
-    fetch("http://www.thecocktaildb.com/api/json/v1/1/lookup.php?iid=" + cocktailID)
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + cocktailID)
         .then(response => response.json())
         .then(thisCocktail => {
 
@@ -93,44 +110,43 @@ function getCocktailsByID(cocktailID) {
             console.log(thisCocktail);
 
             // Check if there is cocktail in response
-            if (thisCocktail.drinks == null) {
+            if (thisCocktail.drinks[0] === null) {
                 alert("Sorry, can't find any cocktail with this ID, please contact owner.");
-                resultMessage.innerHTML = "Aborted : error.";
+                resultMessage.innerHTML = "An error occurred. Result may be affected.";
                 return;
             } else {
-
-
-                // NON TERMINE !!!!!!!!!!!!!
 
                 // ------------ Starting to add to grid ---------------
 
                 // Setting values :
-                imagePath = thisCocktail.drinks[currentCocktail].strDrinkThumb;
-                name = thisCocktail.drinks[currentCocktail].strDrink;
-                category = thisCocktail.drinks[currentCocktail].strCategory;
-                alcohol = thisCocktail.drinks[currentCocktail].strAlcoholic;
-                glass = thisCocktail.drinks[currentCocktail].strGlass;
-                measure = thisCocktail.drinks[currentCocktail].strMeasure1;
+                imagePath = thisCocktail.drinks[indexToLookup].strDrinkThumb;
+                name = thisCocktail.drinks[indexToLookup].strDrink;
+                category = thisCocktail.drinks[indexToLookup].strCategory;
+                alcohol = thisCocktail.drinks[indexToLookup].strAlcoholic;
+                glass = thisCocktail.drinks[indexToLookup].strGlass;
+                measure = thisCocktail.drinks[indexToLookup].strMeasure1;
 
                 resultIngredientsIterator = 0;
                 resultIngredientsPath = "";
 
-                if (thisCocktail.drinks[currentCocktail].strIngredient1 === null) {
+                if (thisCocktail.drinks[indexToLookup].strIngredient1 === null) {
                     resultCocktailIngredients[loadedCocktailNumber].innerHTML = "Not specified";
                 } else {
                     // Adding ingredients to an array
                     do {
                         resultIngredientsIterator++;
                         // Evaluate the value at this path in JSON
-                        resultIngredientsPath = thisCocktail.drinks[currentCocktail]['strIngredient' + resultIngredientsIterator];
+                        resultIngredientsPath = thisCocktail.drinks[indexToLookup]['strIngredient' + resultIngredientsIterator];
                         if (resultIngredientsPath !== null) {
                             ingredients.push(resultIngredientsPath);
                         }
                     } while (resultIngredientsPath !== null && resultIngredientsIterator <= 15);
                 }
 
-                instruction = thisCocktail.drinks[currentCocktail].strInstructions;
-                addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients, instruction, measure);
+                instruction = thisCocktail.drinks[indexToLookup].strInstructions;
+                linkVideo = thisCocktail.drinks[indexToLookup].strVideo;
+
+                addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients, instruction, measure, linkVideo);
 
             }
 
@@ -140,21 +156,21 @@ function getCocktailsByID(cocktailID) {
 
 function getCocktailsByIngredient() {
 
-    fetch("http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + searchbar.value)
-        .then(response => response.json())
-        .then(listCocktails => {
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + searchbar.value)
+        .then(listCocktailIngredient => listCocktailIngredient.json())
+        .then(listCocktailIngredient => {
 
             // Log response
-            console.log(listCocktails);
+            console.log(listCocktailIngredient);
 
             // Check if there is cocktail in response
-            if (listCocktails.drinks == null) {
+            if (listCocktailIngredient.drinks == null) {
                 alert("Sorry, can't find any cocktail with this ingredient, please enter a valid search.");
                 resultMessage.innerHTML = "No result found";
             } else {
 
                 // Display matches
-                resultNumber = listCocktails.drinks.length;
+                resultNumber = listCocktailIngredient.drinks.length;
                 resultMessage.innerHTML = resultNumber + " cocktails founds :";
 
                 // Limit display
@@ -163,9 +179,8 @@ function getCocktailsByIngredient() {
                 } else {
                     displayResult = resultNumber;
                 }
-
-                for (let currentCocktail = 0; currentCocktail < listCocktails.length; currentCocktail++) {
-                    getCocktailsByID(listCocktails[currentCocktail].idDrink)
+                for (let currentCocktail = 0; currentCocktail < displayResult; currentCocktail++) {
+                    getCocktailsByID(listCocktailIngredient.drinks[currentCocktail].idDrink)
                 }
             }
             return false;
@@ -194,19 +209,21 @@ searchbar.addEventListener("keypress", function (event) {
 });
 
 
-function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients, instruction, measure) {
+function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients, instruction, measure, linkVideo) {
 
 
-    let resultElements;
-    let resultImageContainer;
-    let resultImage;
-    let resultCocktailName;
-    let resultCocktailCategory;
-    let resultCocktailIngredients;
-    let resultCocktailAlcohol;
-    let resultIngredientsIterator;
-    let resultCocktailInstruction;
-    let resultCocktailGlass;
+    let resultElements = null;
+    let resultImageContainer = null;
+    let resultImage = null;
+    let resultCocktailName = null;
+    let resultCocktailCategory = null;
+    let resultCocktailIngredients = null;
+    let resultCocktailAlcohol = null;
+    let resultIngredientsIterator = null;
+    let resultCocktailInstruction = null;
+    let resultCocktailGlass = null;
+    let resultVideoContainer = null;
+    let resultVideoText = null;
 
     // Create element :
 
@@ -219,6 +236,8 @@ function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients,
     resultCocktailGlass = document.createElement("p");
     resultCocktailIngredients = document.createElement("p");
     resultCocktailInstruction = document.createElement("p");
+    resultVideoContainer = document.createElement("div");
+    resultVideoText = document.createElement("a");
 
 
     // Add class :
@@ -233,6 +252,8 @@ function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients,
     resultCocktailGlass.classList.add("result-element-glass");
     resultCocktailIngredients.classList.add("result-element-category");
     resultCocktailInstruction.classList.add("result-element-instruction");
+    resultVideoContainer.classList.add("result-element-video-container");
+    resultVideoText.classList.add("result-element-video-text");
 
 
     // Setting values :
@@ -258,6 +279,7 @@ function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients,
     resultCocktailInstruction.innerHTML += instruction;
 
 
+
     // Linking elements
 
     resultGrid.appendChild(resultElements);
@@ -269,6 +291,15 @@ function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients,
     resultElements.appendChild(resultCocktailGlass);
     resultElements.appendChild(resultCocktailIngredients);
     resultElements.appendChild(resultCocktailInstruction);
+
+    // Adding video if provided :
+
+    if (!(linkVideo === null)) {
+        resultVideoText.innerHTML = "View video <i class=\"fa-solid fa-video\"></i>";
+        resultVideoText.href = linkVideo;
+        resultElements.appendChild(resultVideoContainer);
+        resultVideoContainer.appendChild(resultVideoText);
+    }
 
     console.log("One cocktail was added to the grid.")
 

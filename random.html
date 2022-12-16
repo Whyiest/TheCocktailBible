@@ -5,18 +5,29 @@
     <link rel="stylesheet" href="general.css">
     <link rel="stylesheet" href="random.css">
     <title>Random | The Cocktail Bible</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <script src="https://kit.fontawesome.com/5edb51746c.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 
 </head>
-<body>
+<body onload="randomActive()">
 <navbar>
   <ul id = nav-list>
     <li class="nav-element"><a class="nav-link" href="index.html"><i class="fa-solid fa-house-chimney"></i>&nbsp;Home</a></li>
     <li class="nav-element"><a class="nav-link" href="search.html">Name</a></li>
-    <li class="nav-element"><a class="nav-link" href="#">Ingredients</a></li>
+    <li class="nav-element"><a class="nav-link" href="search.html?s=ingredient">Ingredients</a></li>
     <li class="nav-element"><a class="nav-link" href="random.html">Random</a></li>
-    <li class="nav-element"><a class="nav-link" href="#">Contact</a></li>
+    <li class="nav-element"><a class="nav-link" href="mailto:contact@cocktail.bible.com">Contact</a></li>
   </ul>
+
+    <select id="language-select">
+        <option value="en">EN</option>
+        <option value="fr">FR</option>
+    </select>
+
 </navbar>
 
 <section id="random">
@@ -30,5 +41,8 @@
 
     <script src="getRandomCocktail.js"></script>
 </section>
+
+<script src="lang.js"></script>
+
 </body>
 </html>

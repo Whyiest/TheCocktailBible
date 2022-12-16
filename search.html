@@ -5,19 +5,31 @@
     <link rel="stylesheet" href="general.css">
     <link rel="stylesheet" href="search.css">
     <title>Search | The Cocktail Bible</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Dev Note : Font Awesome linked with Why account. Don't reuse on others projects -->
     <script src="https://kit.fontawesome.com/5edb51746c.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 
 </head>
-<body>
+<body onload="processRequest(), searchActive()">
+
+
 
 
 <section id="banner">
+
     <div id="banner-container">
+
         <div id="switcher-container" onclick="switchSearch(searchState)">
-            <p id="switcher-text">Search by <span class="button-text-color">name</span></p>
+            <p id="switcher-text">Search by <span class="button-text-color">ingredients</span></p>
             <img id="switcher-icon" src="images/switch-icon-white.png" alt="switch arrow">
         </div>
+
+
+
         <p id="banner-title">Search</p>
 
         <div id="back-button">
@@ -29,16 +41,27 @@
 
 </section>
 
+
+
 <section id="result">
+
     <form id="search-bar-container">
         <input name="search-field" id="search-bar" placeholder="Search a cocktail by name">
         <button name="search-button" id="search-button" type="button" onclick="getCocktailsByName()"><i
                 class="fa fa-search"></i>
         </button>
+
+        <select id="language-select">
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+        </select>
+
     </form>
 
+
+
     <div id="result-container">
-        <p id="result-message">Click to display random cocktail !</p>
+        <p id="result-message">Loading search API...</p>
         <div id="result-grid">
         </div>
     </div>
@@ -46,5 +69,7 @@
 
 <script src="getCocktail.js"></script>
 <script src="switchSearch.js"></script>
+<script src="lang.js"></script>
+
 </body>
 </html>

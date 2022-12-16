@@ -18,9 +18,15 @@
     src: url("fonts/LoveloBlack.otf");
 }
 
+@font-face {
+    font-family: Calibri;
+    src: url("fonts/Calibri.ttf");
+}
+
 navbar {
     z-index: 10;
     position: fixed;
+    display: flex;
     top: 0;
     width: 100%;
     height: 4em;
@@ -53,6 +59,20 @@ navbar {
 .nav-link:hover {
     scale: 105%;
     color: cornflowerblue;
+}
+
+#language-select {
+    display: inline-block;
+    width: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 1.1em;
+    border: none;
+    margin-right: 10%;
+    background-color: black;
+    color: white;
+
+
 }
 
 

@@ -69,6 +69,7 @@ body {
 .fa-circle-chevron-left {
     color: white;
 }
+
 #back-button:hover {
     background-color: #386775;
     cursor: pointer;
@@ -106,7 +107,6 @@ body {
 }
 
 #banner-container {
-    object-fit: fill;
     width: 100%;
     height: 30vh;
     background: url("images/search-banner2.jpg") no-repeat center center fixed;
@@ -119,9 +119,11 @@ body {
 
 #banner-title {
     font-family: Hunters;
-    transform: translateY(60%);
-    height: 50%;
-    width: 100%;
+    height: fit-content;
+    width: fit-content;
+    display: block;
+    margin: auto;
+    padding-top: 9vh;
     letter-spacing: 0.1em;
     text-align: center;
     color: white;
@@ -133,6 +135,7 @@ body {
     transform: translateY(-50%);
     width: 100%;
     height: 2em;
+    display: flex;
 }
 
 #search-bar {
@@ -161,6 +164,19 @@ body {
 
 #search-button:hover {
     background-color: grey;
+}
+
+#language-select {
+    display: inline-block;
+    width: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 1.1em;
+    border: none;
+    background-color: black;
+
+    color: white;
+
 }
 
 
@@ -294,6 +310,29 @@ body {
     padding-bottom: 5%;
 }
 
+.result-element-video-container {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: #125d7a;
+    margin-bottom: 3%;
+    border-radius: 15px;
+    border: 1px solid white;
+    text-align: center;
+    animation: append-fadein .4 .5s linear;
+}
+
+.result-element-video-text {
+    width: 100%;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.fa-video {
+    font-size: 0.7em;
+}
 
 footer {
     position: relative;
@@ -376,15 +415,18 @@ footer {
         width: 40%
     }
 
+    #banner-title {
+        font-size: 4em;
+        padding-top: 11vh;
+
+    }
+
     #back-button {
         padding-top: 1%;
         padding-bottom: 1%;
         width: 40%;
     }
 
-    #banner-title {
-        font-size: 3.0em;
-    }
 
     #result-grid {
         grid-template-columns: 1fr;

@@ -6,21 +6,32 @@
     <title>The Cocktail Bible</title>
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="general.css">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Dev Note : Font Awesome linked with Why account. Don't reuse on others projects -->
     <script src="https://kit.fontawesome.com/5edb51746c.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 </head>
 
-<body>
+<body onload="homeActive()">
 
 <navbar>
     <ul id=nav-list>
         <li class="nav-element"><a class="nav-link" href="index.html"><i class="fa-solid fa-house-chimney"></i>&nbsp;Home</a></li>
         <li class="nav-element"><a class="nav-link" href="search.html">Name</a></li>
-        <li class="nav-element"><a class="nav-link" href="#">Ingredients</a></li>
+        <li class="nav-element"><a class="nav-link" href="search.html?s=ingredient">Ingredients</a></li>
         <li class="nav-element"><a class="nav-link" href="random.html">Random</a></li>
-        <li class="nav-element"><a class="nav-link" href="#">Contact</a></li>
+        <li class="nav-element"><a class="nav-link" href="mailto:contact@cocktail.bible.com">Contact</a></li>
+
     </ul>
+
+    <select id="language-select">
+        <option value="en">EN</option>
+        <option value="fr">FR</option>
+    </select>
+
 </navbar>
 
 <section id="home">
@@ -34,11 +45,11 @@
 
         <div id="home-button-column">
             <div id="home-button-container">
-                <div class="home-button-byingredient home-button">
-                    <a id="home-button-byingredient-text" href="search.html">Search by name&nbsp; <i class="fa-solid fa-spell-check"></i></a>
-                </div>
                 <div class="home-button-byname home-button">
-                    <a id="home-button-byname-text" href="ingredients.html">Search by ingredient&nbsp; <i class="fa-solid fa-lemon"></i></a>
+                    <a id="home-button-byname-text" href="search.html">Search by name&nbsp; <i class="fa-solid fa-spell-check"></i></a>
+                </div>
+                <div class="home-button-byingredient home-button">
+                    <a id="home-button-byingredient-text" href="search.html?s=ingredient" >Search by ingredient&nbsp; <i class="fa-solid fa-lemon"></i></a>
                 </div>
                 <div class="home-button-random home-button">
                     <a id="home-button-random-text" href="random.html">Random cocktail ?&nbsp; <i class="fa-solid fa-dice"></i></a>
@@ -48,6 +59,9 @@
         </div>
     </div>
 </section>
+
+<script src="lang.js"></script>
+
 
 </body>
 </html>
