@@ -14,7 +14,7 @@
 
 
 </head>
-<body onload="processRequest(), searchActive()">
+<body onload="processRequest(), searchActive(), getIngredientsList()">
 
 
 
@@ -23,7 +23,7 @@
 
     <div id="banner-container">
 
-        <div id="switcher-container" onclick="switchSearch(searchState)">
+        <div id="switcher-container" onclick="switchSearch()">
             <p id="switcher-text">Search by <span class="button-text-color">ingredients</span></p>
             <img id="switcher-icon" src="images/switch-icon-white.png" alt="switch arrow">
         </div>
@@ -51,10 +51,6 @@
                 class="fa fa-search"></i>
         </button>
 
-        <select id="language-select">
-            <option value="en">EN</option>
-            <option value="fr">FR</option>
-        </select>
 
     </form>
 

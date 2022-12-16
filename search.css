@@ -204,6 +204,7 @@ body {
 }
 
 #result-message {
+    background-color: rgba(0, 0, 0, 0.46);
     clear: both;
     color: white;
     width: 100%;
