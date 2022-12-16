@@ -44,8 +44,8 @@ function getIngredientsList() {
 function getCocktailsByName() {
 
 
-    let imagePath, name, category, alcohol, glass, ingredients, instruction, measure, linkVideo;
-    ingredients = [];
+    let imagePath, name, category, alcohol, glass, instruction, measure, linkVideo;
+    let ingredients = [];
 
     // Clearing result grid
     currentlyDisplay [0] = true;
@@ -94,6 +94,7 @@ function getCocktailsByName() {
                         resultCocktailIngredients.innerHTML = "Not specified";
                     } else {
                         // Adding ingredients to an array
+                        ingredients= [];
                         do {
                             resultIngredientsIterator++;
                             // Evaluate the value at this path in JSON
@@ -260,6 +261,7 @@ function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients,
     let resultCocktailGlass = null;
     let resultVideoContainer = null;
     let resultVideoText = null;
+    let resultIngredientsImage = null;
 
     // All cocktail placeholder :
 
@@ -317,7 +319,6 @@ function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients,
     resultVideoContainer.classList.add("result-element-video-container");
     resultVideoText.classList.add("result-element-video-text");
 
-
     // Setting values :
 
     resultImage.src = imagePath;
@@ -335,7 +336,10 @@ function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients,
     resultIngredientsIterator = 0;
 
     for (let h = 0; h < ingredients.length; h++) {
-        resultCocktailIngredients.innerHTML += '- ' + ingredients[h] + '<br>';
+
+        resultIngredientsImage = "http://www.thecocktaildb.com/images/ingredients/" + ingredients[h].replace(' ', '%20') + ".png";
+        resultCocktailIngredients.innerHTML += '- ' + ingredients[h] + ' <img class = \"result-element-ingredient-image\" src= ' + resultIngredientsImage + '> <br>';
+
     }
 
     resultCocktailInstruction.innerHTML = "<i class=\"fa-solid fa-paste\"></i><span class=\n'coloredBold\'> " + instructionsPlaceholder + " </span>";
@@ -352,6 +356,7 @@ function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients,
     resultElements.appendChild(resultCocktailGlass);
     resultElements.appendChild(resultCocktailIngredients);
     resultElements.appendChild(resultCocktailInstruction);
+
 
     // Adding video if provided :
 
@@ -385,7 +390,6 @@ setInterval(displayRandomSuggest, 1000);
 let searchButtonText = document.getElementById("switcher-text");
 
 function displayRandomSuggest() {
-    console.log(searchButtonText.innerHTML);
     if (sessionStorage.getItem('pageState') === 'name' && currentlyDisplay[0] == false) {
         resultMessage.innerHTML = searchByNameMessage;
     }

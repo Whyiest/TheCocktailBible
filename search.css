@@ -277,9 +277,14 @@ body {
 }
 
 .result-element-ingredients {
+    font-size: 0.9em;
     width: fit-content;
     display: inline-block;
     animation: append-fadein .4s linear;
+}
+.result-element-ingredient-image {
+    height: 1em;
+
 }
 
 
