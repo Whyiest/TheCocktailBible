@@ -36,6 +36,31 @@ function getRandomCocktails() {
         changeMessage = "Click again to discover another cocktail !";
     }
 
+    // All cocktail placeholder :
+
+    let categoryPlaceholder = "";
+    let glassPlaceholder = "";
+    let typePlaceholder = "";
+    let ingredientsPlaceholder = "";
+    let instructionsPlaceholder = "";
+    let videoPlaceholder = "";
+
+    if (localStorage.getItem('lang') === 'fr') {
+        categoryPlaceholder = "Catégorie";
+        glassPlaceholder = "Verre";
+        typePlaceholder = "Type";
+        ingredientsPlaceholder = "Ingrédients";
+        instructionsPlaceholder = "Instructions";
+        videoPlaceholder = "Tutoriel vidéo";
+    } else {
+        categoryPlaceholder = "Category";
+        glassPlaceholder = "Glass";
+        typePlaceholder = "Type";
+        ingredientsPlaceholder = "Ingredients";
+        instructionsPlaceholder = "Instructions";
+        videoPlaceholder = "View video";
+    }
+
     // Change result message
     resultMessage = document.getElementById("random-message");
     resultMessage.innerHTML = loadingMessage;
@@ -98,16 +123,16 @@ function getRandomCocktails() {
             resultImage.src = randomCocktail.drinks[indexCocktail].strDrinkThumb;
             resultImage.style.borderRadius = "10px";
             resultCocktailName.innerHTML = randomCocktail.drinks[indexCocktail].strDrink;
-            resultCocktailCategory.innerHTML = "<i class=\"fa-solid fa-boxes-stacked\"></i><span class=\n'coloredBold\'> Category : </span>";
+            resultCocktailCategory.innerHTML = "<i class=\"fa-solid fa-boxes-stacked\"></i><span class=\n'coloredBold\'> " + categoryPlaceholder +" : </span>";
             resultCocktailCategory.innerHTML += randomCocktail.drinks[indexCocktail].strCategory;
-            resultCocktailAlcohol.innerHTML = "<i class=\"fa-solid fa-wine-bottle\"></i><span class=\n'coloredBold\'> Type : </span>";
+            resultCocktailAlcohol.innerHTML = "<i class=\"fa-solid fa-wine-bottle\"></i><span class=\n'coloredBold\'> " + typePlaceholder + " : </span>";
             resultCocktailAlcohol.innerHTML += randomCocktail.drinks[indexCocktail].strAlcoholic;
-            resultCocktailGlass.innerHTML = "<i class=\"fa-solid fa-martini-glass-citrus\"></i><span class=\n'coloredBold\'> Glass : </span>";
+            resultCocktailGlass.innerHTML = "<i class=\"fa-solid fa-martini-glass-citrus\"></i><span class=\n'coloredBold\'> "+ glassPlaceholder + " : </span>";
             resultCocktailGlass.innerHTML += randomCocktail.drinks[indexCocktail].strGlass;
             resultCocktailQuantity = randomCocktail.drinks[indexCocktail].strMeasure1;
             resultCocktailGlass.innerHTML += " (" + resultCocktailQuantity + ")";
-            resultCocktailIngredients.innerHTML = "<i class=\"fa-solid fa-leaf\"></i><span class=\n'coloredBold\'> Ingredients : </span>";
-            resultCocktailInstruction.innerHTML = "<i class=\"fa-solid fa-paste\"></i><span class=\n'coloredBold\'> Instructions : </span>";
+            resultCocktailIngredients.innerHTML = "<i class=\"fa-solid fa-leaf\"></i><span class=\n'coloredBold\'> " + ingredientsPlaceholder + " : </span>";
+            resultCocktailInstruction.innerHTML = "<i class=\"fa-solid fa-paste\"></i><span class=\n'coloredBold\'> " + instructionsPlaceholder + " : </span>";
             resultCocktailInstruction.innerHTML += randomCocktail.drinks[indexCocktail].strInstructions;
 
             // Reset values and setting ingredients
