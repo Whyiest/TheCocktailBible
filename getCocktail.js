@@ -69,7 +69,7 @@ function getCocktailsByName() {
                 resultMessage.innerHTML = resultNumber + cocktailFoundMessage;
 
                 // Limit display
-                if (resultNumber > 15) {
+                if (resultNumber >= 15) {
                     displayResult = 15;
                 } else {
                     displayResult = resultNumber;
@@ -77,7 +77,7 @@ function getCocktailsByName() {
 
                 // ------------ Starting to add to grid ---------------
 
-                for (let currentCocktail = 0; currentCocktail < 15; currentCocktail++) {
+                for (let currentCocktail = 0; currentCocktail < displayResult; currentCocktail++) {
 
                     // Setting values :
                     imagePath = listCocktails.drinks[currentCocktail].strDrinkThumb;
@@ -128,7 +128,10 @@ function getCocktailsByID(cocktailID) {
     let ingredients = null;
     let instruction = null;
     let measure = null;
+    let resultIngredientsPath = null;
+    let linkVideo = null;
     let indexToLookup = 0
+
     ingredients = [];
 
     fetch("https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + cocktailID)
@@ -260,12 +263,29 @@ function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients,
 
     // All cocktail placeholder :
 
-    let categoryPlaceholder = "Category";
-    let glassPlaceholder = "Glass";
-    let typePlaceholder = "Type";
-    let ingredientsPlaceholder = "Ingredients";
-    let instructionsPlaceholder = "Instructions";
-    let videoPlaceholer = "View video";
+    let categoryPlaceholder = "";
+    let glassPlaceholder = "";
+    let typePlaceholder = "";
+    let ingredientsPlaceholder = "";
+    let instructionsPlaceholder = "";
+    let videoPlaceholder = "";
+
+    if (localStorage.getItem('lang') === 'fr') {
+        categoryPlaceholder = "Catégorie";
+        glassPlaceholder = "Verre";
+        typePlaceholder = "Type";
+        ingredientsPlaceholder = "Ingrédients";
+        instructionsPlaceholder = "Instructions";
+        videoPlaceholder = "Tutoriel vidéo";
+    } else {
+        categoryPlaceholder = "Category";
+        glassPlaceholder = "Glass";
+        typePlaceholder = "Type";
+        ingredientsPlaceholder = "Ingredients";
+        instructionsPlaceholder = "Instructions";
+        videoPlaceholder = "View video";
+    }
+
 
     // Create element :
 
@@ -336,7 +356,7 @@ function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients,
     // Adding video if provided :
 
     if (!(linkVideo === null)) {
-        resultVideoText.innerHTML = videoPlaceholer + " <i class=\"fa-solid fa-video\"></i>";
+        resultVideoText.innerHTML = videoPlaceholder + " <i class=\"fa-solid fa-video\"></i>";
         resultVideoText.href = linkVideo;
         resultElements.appendChild(resultVideoContainer);
         resultVideoContainer.appendChild(resultVideoText);
@@ -362,8 +382,10 @@ function checkEmpty() {
 // Display random suggest
 setInterval(displayRandomSuggest, 1000);
 
-function displayRandomSuggest() {
+let searchButtonText = document.getElementById("switcher-text");
 
+function displayRandomSuggest() {
+    console.log(searchButtonText.innerHTML);
     if (sessionStorage.getItem('pageState') === 'name' && currentlyDisplay[0] == false) {
         resultMessage.innerHTML = searchByNameMessage;
     }

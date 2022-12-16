@@ -14,7 +14,7 @@
 
 
 </head>
-<body onload="processRequest(), searchActive(), checkLanguageSearch()">
+<body onload="processRequest(), searchActive(), checkLanguageSearch(), getIngredientsList()">
 
 
 
@@ -23,7 +23,7 @@
 
     <div id="banner-container">
 
-        <div id="switcher-container" onclick="switchSearch(searchState)">
+        <div id="switcher-container" onclick="switchSearch()">
             <p id="switcher-text">Search by <span class="button-text-color">ingredients</span></p>
             <img id="switcher-icon" src="images/switch-icon-white.png" alt="switch arrow">
         </div>
@@ -34,8 +34,6 @@
 
         <div id="back-button">
             <a id="back-button-text" href="index.html"> <i class="fa-solid fa-circle-chevron-left"></i>&nbsp;&nbsp;Go back to <span class="button-text-color">menu</span></a>
-
-            <!--<img id="back-button-icon" src="images/left-arrow-black.svg" alt="back arrow">-->
         </div>
     </div>
 
@@ -50,12 +48,6 @@
         <button name="search-button" id="search-button" type="button" onclick="getCocktailsByName()"><i
                 class="fa fa-search"></i>
         </button>
-
-        <select id="language-select">
-            <option value="en">EN</option>
-            <option value="fr">FR</option>
-        </select>
-
     </form>
 
 
