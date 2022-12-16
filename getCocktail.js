@@ -409,15 +409,12 @@ function checkEmpty() {
 // Display random suggest
 setInterval(displayRandomSuggest, 1000);
 
-let searchButtonText = document.getElementById("switcher-text");
-
 function displayRandomSuggest() {
     if (sessionStorage.getItem('pageState') === 'name' && currentlyDisplay[0] == false) {
         resultMessage.innerHTML = searchByNameMessage;
     }
 
     if (sessionStorage.getItem('pageState') === 'ingredient' && currentlyDisplay[0] == false) {
-        let randomColor = Math.floor(Math.random() * 16777215).toString(16);
         let randomIndex = getRandomInt(0, ingredientsList.length - 1);
         let randomIngredient = ingredientsList[randomIndex];
         resultMessage.innerHTML = suggestionMessage + " <span class='coloredBold'>" + randomIngredient + "</span> ?";

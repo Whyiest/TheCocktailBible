@@ -1,8 +1,8 @@
 // Variable stored know what we are looking for
 sessionStorage.setItem('pageState', 'name');
 
-function processRequest () {
 
+function processRequest () {
     const urlParams = new URLSearchParams(window.location.search);
     const searchValue = urlParams.get('s');
     if (searchValue == "ingredient") {
@@ -20,7 +20,7 @@ function switchSearch() {
     let resultMessagePlaceholder = "";
 
     let searchButtonTextArea = document.getElementById("switcher-text");
-    let searchBarText = document.getElementById("search-bar");
+    let searchBar = document.getElementById("search-bar");
     let searchButton = document.getElementById("search-button");
     let resultMessageArea = document.getElementById("result-message");
 
@@ -45,19 +45,19 @@ function switchSearch() {
 
     if (sessionStorage.getItem('pageState') === 'ingredient') {
 
+
         resultGrid.innerHTML = "";
         searchButtonTextArea.innerHTML = buttonIngredientPlaceholder;
-        searchBarText.placeholder = searchBarNamePlaceholder;
+        searchBar.placeholder = searchBarNamePlaceholder;
         resultMessageArea.innerHTML = resultMessagePlaceholder;
-
         searchButton.setAttribute('onclick','getCocktailsByName()')
         sessionStorage.setItem('pageState', 'name');
     }
     else if (sessionStorage.getItem('pageState') === 'name') {
 
         resultGrid.innerHTML = "";
-        searchButtonTextArea.innerHTML = buttonNamePlaceholder;
-        searchBarText.placeholder = searchBarIngredientPlaceholder;
+        searchButtonTextArea.innerHTML = buttonNamePlaceholder  ;
+        searchBar.placeholder = searchBarIngredientPlaceholder;
         searchButton.setAttribute('onclick','getCocktailsByIngredient()')
         sessionStorage.setItem('pageState', 'ingredient');
     }

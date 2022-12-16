@@ -2,7 +2,6 @@ let home = false;
 let search = false;
 let random = false;
 let lang;
-let elements = [];
 
 
 function homeActive() {
@@ -68,16 +67,16 @@ function translateRandomFr() {
 }
 
 function translateSearchEn() {
-    document.getElementById("banner-container").innerHTML = "<div id=\"switcher-container\" onclick=\"switchSearch()\"><p id=\"switcher-text\">Search by <span class=\"button-text-color\">ingredients</span></p><img id=\"switcher-icon\" src=\"images/switch-icon-white.png\" alt=\"switch arrow\"></div><p id=\"banner-title\">Search</p><div id=\"back-button\"><a id=\"back-button-text\" href=\"index.html\"> <i class=\"fa-solid fa-circle-chevron-left\"></i>&nbsp;&nbsp;Go back to <span class=\"button-text-color\">menu</span></a></div>"
-    document.getElementById("search-bar").setAttribute("placeholder", "Search a cocktail by name")
-    document.getElementById("result-message").innerHTML = "Loading search API..."
+    document.getElementById("banner-title").innerHTML = "Search";
+    document.getElementById("back-button-text").innerHTML = "<i class=\"fa-solid fa-circle-chevron-left\"></i>&nbsp;&nbsp;Go back to <span class=\"button-text-color\">menu</span>";
+        document.getElementById("result-message").innerHTML = "Loading search API...";
     localStorage.setItem('lang', 'en')
 }
 
 function translateSearchFr() {
-    document.getElementById("banner-container").innerHTML = "<div id=\"switcher-container\" onclick=\"switchSearch()\"><p id=\"switcher-text\">Chercher par <span class=\"button-text-color\">ingrédients</span></p><img id=\"switcher-icon\" src=\"images/switch-icon-white.png\" alt=\"switch arrow\"></div><p id=\"banner-title\">Rechercher</p><div id=\"back-button\"><a id=\"back-button-text\" href=\"index.html\"> <i class=\"fa-solid fa-circle-chevron-left\"></i>&nbsp;&nbsp;Retourner au <span class=\"button-text-color\">menu</span></a></div>"
-    document.getElementById("search-bar").setAttribute("placeholder", "Rechercher un cocktail par nom")
-    document.getElementById("result-message").innerHTML = "Chargement de l'API..."
+    document.getElementById("banner-title").innerHTML = "Rechercher";
+    document.getElementById("back-button-text").innerHTML = "<i class=\"fa-solid fa-circle-chevron-left\"></i>&nbsp;&nbsp;Retour au <span class=\"button-text-color\">menu</span>";
+    document.getElementById("result-message").innerHTML = "Chargement de l'API...";
     localStorage.setItem('lang', 'fr')
 
 }

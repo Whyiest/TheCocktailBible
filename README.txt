@@ -9,6 +9,10 @@ A tool to change the language between English and French is available!
 
 
 Authors :
+
 Esteban Magnon
+McGill ID :  261124249
+
 Thomas Doligé
+McGill ID :  261124334
 
