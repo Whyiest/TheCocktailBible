@@ -3,7 +3,16 @@ let resultGrid; // Link to grid where cocktail are displayed
 let resultMessage; // Link to the message under the search bar
 let resultNumber; // Show the number of result found
 let displayResult; // Store how many cocktail are displayed
+let ingredientsList = []; // Store all the possible ingredients
+let currentlyDisplay = [false]; // True if displaying cocktails
 
+// All messages displayed :
+
+let searchByNameMessage = "Search a cocktail with the field above !";
+let ingredientNotFoundMessage = "Sorry, we didn\'t recognize this ingredient.";
+let noCocktailFoundMessage = "No result found, please retry.";
+let cocktailFoundMessage = " cocktail(s) found(s) :";
+let errorOccurredMessage = "An error occurred. Result may be affected.";
 
 
 // ERROR TO PATCH (14/12/2022) : getCocktail.js:49 Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'strDrinkThumb')
@@ -14,12 +23,33 @@ searchbar = document.getElementById('search-bar');
 resultGrid = document.getElementById("result-grid");
 resultMessage = document.getElementById("result-message");
 
+function getIngredientsList() {
+
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list")
+        .then(response => response.json())
+        .then(list => {
+
+            console.log(list)
+            ingredientsList = [];
+
+            for (let i = 0; i < list.drinks.length; i++) {
+                ingredientsList.push(list.drinks[i].strIngredient1);
+            }
+
+            console.log(ingredientsList);
+        });
+
+}
 
 function getCocktailsByName() {
 
-    let imagePath, name, category, alcohol, glass, ingredients, instruction, measure, linkVideo;
 
+    let imagePath, name, category, alcohol, glass, ingredients, instruction, measure, linkVideo;
     ingredients = [];
+
+    // Clearing result grid
+    currentlyDisplay [0] = true;
+    resultGrid.innerHTML = "";
 
     fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + searchbar.value)
         .then(response => response.json())
@@ -31,13 +61,12 @@ function getCocktailsByName() {
             // Check if there is cocktail in response
             let resultIngredientsPath;
             if (listCocktails.drinks == null) {
-                alert("Sorry, can't find any cocktail with this name, please enter a valid search.");
-                resultMessage.innerHTML = "No result found";
+                resultMessage.innerHTML = noCocktailFoundMessage;
             } else {
 
                 // Display matches
                 resultNumber = listCocktails.drinks.length;
-                resultMessage.innerHTML = resultNumber + " cocktails founds :";
+                resultMessage.innerHTML = resultNumber + cocktailFoundMessage;
 
                 // Limit display
                 if (resultNumber > 15) {
@@ -112,7 +141,7 @@ function getCocktailsByID(cocktailID) {
             // Check if there is cocktail in response
             if (thisCocktail.drinks[0] === null) {
                 alert("Sorry, can't find any cocktail with this ID, please contact owner.");
-                resultMessage.innerHTML = "An error occurred. Result may be affected.";
+                resultMessage.innerHTML = errorOccurredMessage;
                 return;
             } else {
 
@@ -156,61 +185,65 @@ function getCocktailsByID(cocktailID) {
 
 function getCocktailsByIngredient() {
 
-    fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + searchbar.value)
-        .then(listCocktailIngredient => listCocktailIngredient.json())
-        .then(listCocktailIngredient => {
+    if (ingredientsList.length == 0) {
+        alert("Critical error : unable to contact API.");
+        window.location.reload();
+    } else {
 
-            // Log response
-            console.log(listCocktailIngredient);
+        let verif = false;
 
-            // Check if there is cocktail in response
-            if (listCocktailIngredient.drinks == null) {
-                alert("Sorry, can't find any cocktail with this ingredient, please enter a valid search.");
-                resultMessage.innerHTML = "No result found";
-            } else {
-
-                // Display matches
-                resultNumber = listCocktailIngredient.drinks.length;
-                resultMessage.innerHTML = resultNumber + " cocktails founds :";
-
-                // Limit display
-                if (resultNumber > 15) {
-                    displayResult = 15;
-                } else {
-                    displayResult = resultNumber;
-                }
-                for (let currentCocktail = 0; currentCocktail < displayResult; currentCocktail++) {
-                    getCocktailsByID(listCocktailIngredient.drinks[currentCocktail].idDrink)
-                }
-            }
-            return false;
-        });
-}
-
-
-// ----------------- General Tools for the page ------------------
-
-
-setInterval(checkEmpty, 100);
-
-function checkEmpty() {
-    if (searchbar.value == "") {
+        // Clearing result grid
         resultGrid.innerHTML = "";
-        resultMessage.innerHTML = "Search a cocktail with the field above !";
+        currentlyDisplay [0] = true;
+
+        for (let i = 0; i < ingredientsList.length; i++) {
+            if (ingredientsList[i].toLowerCase() === searchbar.value.toLowerCase()) {
+                verif = true;
+                break;
+            }
+        }
+        if (verif == true) {
+
+            fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + searchbar.value)
+                .then(listCocktailIngredient => listCocktailIngredient.json())
+                .then(listCocktailIngredient => {
+
+                    // Log response
+                    console.log(listCocktailIngredient);
+
+                    // Check if there is cocktail in response
+                    if (listCocktailIngredient.drinks == null) {
+                        resultMessage.innerHTML = noCocktailFoundMessage;
+                    } else {
+
+                        // Display matches
+                        resultNumber = listCocktailIngredient.drinks.length;
+                        resultMessage.innerHTML = resultNumber + cocktailFoundMessage;
+
+                        // Limit display
+                        if (resultNumber > 15) {
+                            displayResult = 15;
+                        } else {
+                            displayResult = resultNumber;
+                        }
+                        for (let currentCocktail = 0; currentCocktail < displayResult; currentCocktail++) {
+                            getCocktailsByID(listCocktailIngredient.drinks[currentCocktail].idDrink)
+                        }
+                    }
+                    return false;
+                });
+        } else {
+            resultMessage.innerHTML = ingredientNotFoundMessage;
+        }
+
     }
+
 }
-
-searchbar.addEventListener("keypress", function (event) {
-
-    if (event.key === "Enter") {
-        event.preventDefault();
-        document.getElementById("search-button").click();
-    }
-});
 
 
 function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients, instruction, measure, linkVideo) {
 
+    // All content :
 
     let resultElements = null;
     let resultImageContainer = null;
@@ -224,6 +257,15 @@ function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients,
     let resultCocktailGlass = null;
     let resultVideoContainer = null;
     let resultVideoText = null;
+
+    // All cocktail placeholder :
+
+    let categoryPlaceholder = "Category";
+    let glassPlaceholder = "Glass";
+    let typePlaceholder = "Type";
+    let ingredientsPlaceholder = "Ingredients";
+    let instructionsPlaceholder = "Instructions";
+    let videoPlaceholer = "View video";
 
     // Create element :
 
@@ -257,17 +299,18 @@ function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients,
 
 
     // Setting values :
+
     resultImage.src = imagePath;
     resultImage.style.borderRadius = "10px";
     resultCocktailName.innerHTML = name;
-    resultCocktailCategory.innerHTML = "<i class=\"fa-solid fa-boxes-stacked\"></i><span class=\n'coloredBold\'> Category : </span>";
+    resultCocktailCategory.innerHTML = "<i class=\"fa-solid fa-boxes-stacked\"></i><span class=\n'coloredBold\'> " + categoryPlaceholder + ": </span>";
     resultCocktailCategory.innerHTML += category
-    resultCocktailAlcohol.innerHTML = "<i class=\"fa-solid fa-wine-bottle\"></i><span class=\n'coloredBold\'> Type : </span>";
+    resultCocktailAlcohol.innerHTML = "<i class=\"fa-solid fa-wine-bottle\"></i><span class=\n'coloredBold\'> " + typePlaceholder + ": </span>";
     resultCocktailAlcohol.innerHTML += alcohol
-    resultCocktailGlass.innerHTML = "<i class=\"fa-solid fa-martini-glass-citrus\"></i><span class=\n'coloredBold\'> Glass : </span>";
+    resultCocktailGlass.innerHTML = "<i class=\"fa-solid fa-martini-glass-citrus\"></i><span class=\n'coloredBold\'> " + glassPlaceholder + " : </span>";
     resultCocktailGlass.innerHTML += glass
     resultCocktailGlass.innerHTML += " (" + measure + ")";
-    resultCocktailIngredients.innerHTML = "<i class=\"fa-solid fa-leaf\"></i><span class=\n'coloredBold\'> Ingredients : </span>";
+    resultCocktailIngredients.innerHTML = "<i class=\"fa-solid fa-leaf\"></i><span class=\n'coloredBold\'> " + ingredientsPlaceholder + " :</span>";
 
     resultIngredientsIterator = 0;
 
@@ -275,12 +318,10 @@ function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients,
         resultCocktailIngredients.innerHTML += '- ' + ingredients[h] + '<br>';
     }
 
-    resultCocktailInstruction.innerHTML = "<i class=\"fa-solid fa-paste\"></i><span class=\n'coloredBold\'> Instructions : </span>";
+    resultCocktailInstruction.innerHTML = "<i class=\"fa-solid fa-paste\"></i><span class=\n'coloredBold\'> " + instructionsPlaceholder + " </span>";
     resultCocktailInstruction.innerHTML += instruction;
 
-
-
-    // Linking elements
+    // Linking and displaying elements :
 
     resultGrid.appendChild(resultElements);
     resultElements.appendChild(resultImageContainer);
@@ -295,13 +336,60 @@ function addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients,
     // Adding video if provided :
 
     if (!(linkVideo === null)) {
-        resultVideoText.innerHTML = "View video <i class=\"fa-solid fa-video\"></i>";
+        resultVideoText.innerHTML = videoPlaceholer + " <i class=\"fa-solid fa-video\"></i>";
         resultVideoText.href = linkVideo;
         resultElements.appendChild(resultVideoContainer);
         resultVideoContainer.appendChild(resultVideoText);
     }
 
-    console.log("One cocktail was added to the grid.")
-
     return false;
 }
+
+// ----------------- General Tools for the page ------------------
+
+
+// Check if input area is empty, and clear it if so
+setInterval(checkEmpty, 1000);
+
+function checkEmpty() {
+    if (searchbar.value == "") {
+        resultGrid.innerHTML = "";
+        currentlyDisplay[0] = false;
+    }
+
+}
+
+// Display random suggest
+setInterval(displayRandomSuggest, 1000);
+
+function displayRandomSuggest() {
+
+    if (sessionStorage.getItem('pageState') === 'name' && currentlyDisplay[0] == false) {
+        resultMessage.innerHTML = searchByNameMessage;
+    }
+
+    if (sessionStorage.getItem('pageState') === 'ingredient' && currentlyDisplay[0] == false) {
+        let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        let randomIndex = getRandomInt(0, ingredientsList.length - 1);
+        let randomIngredient = ingredientsList[randomIndex];
+        resultMessage.innerHTML = "Search a cocktail with the field above ! What about <span class='coloredBold'>" + randomIngredient + "</span> ?";
+    }
+}
+
+// Get random number
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+// Search by pressing enter
+searchbar.addEventListener("keypress", function (event) {
+
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("search-button").click();
+    }
+});
