@@ -51,14 +51,12 @@ function getRandomCocktails() {
         typePlaceholder = "Type";
         ingredientsPlaceholder = "Ingrédients";
         instructionsPlaceholder = "Instructions";
-        videoPlaceholder = "Tutoriel vidéo";
     } else {
         categoryPlaceholder = "Category";
         glassPlaceholder = "Glass";
         typePlaceholder = "Type";
         ingredientsPlaceholder = "Ingredients";
         instructionsPlaceholder = "Instructions";
-        videoPlaceholder = "View video";
     }
 
     // Change result message
