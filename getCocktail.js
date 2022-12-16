@@ -8,11 +8,28 @@ let currentlyDisplay = [false]; // True if displaying cocktails
 
 // All messages displayed :
 
-let searchByNameMessage = "Search a cocktail with the field above !";
-let ingredientNotFoundMessage = "Sorry, we didn\'t recognize this ingredient.";
-let noCocktailFoundMessage = "No result found, please retry.";
-let cocktailFoundMessage = " cocktail(s) found(s) :";
-let errorOccurredMessage = "An error occurred. Result may be affected.";
+let searchByNameMessage;
+let ingredientNotFoundMessage;
+let noCocktailFoundMessage;
+let cocktailFoundMessage;
+let errorOccurredMessage;
+let suggestionMessage;
+
+if (localStorage.getItem('lang') === 'fr') {
+    searchByNameMessage = "Cherchez un cocktail avec la barre ci-dessus !";
+    ingredientNotFoundMessage = "Désolé, nous n\'avons pas trouver cet ingrédient.";
+    noCocktailFoundMessage = "Désolé, nous n'avons trouvé aucun résultat.";
+    cocktailFoundMessage = " cocktail(s) trouvé(s) :";
+    errorOccurredMessage = "Une erreur s\'est produite. Les résultats peuvent avoir été affectés.";
+    suggestionMessage = "Cherchez un cocktail avec la barre ci-dessus ! Envie de ";
+} else {
+    searchByNameMessage = "Search a cocktail with the field above !";
+    ingredientNotFoundMessage = "Sorry, we didn\'t recognize this ingredient.";
+    noCocktailFoundMessage = "No result found, please retry.";
+    cocktailFoundMessage = " cocktail(s) found(s) :";
+    errorOccurredMessage = "An error occurred. Result may be affected.";
+    suggestionMessage = "Search a cocktail with the field above ! What about";
+}
 
 
 // ERROR TO PATCH (14/12/2022) : getCocktail.js:49 Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'strDrinkThumb')
@@ -37,7 +54,9 @@ function getIngredientsList() {
             }
 
             console.log(ingredientsList);
-        });
+        }).catch(error => {
+        throw(error);
+    });
 
 }
 
@@ -94,7 +113,7 @@ function getCocktailsByName() {
                         resultCocktailIngredients.innerHTML = "Not specified";
                     } else {
                         // Adding ingredients to an array
-                        ingredients= [];
+                        ingredients = [];
                         do {
                             resultIngredientsIterator++;
                             // Evaluate the value at this path in JSON
@@ -182,8 +201,9 @@ function getCocktailsByID(cocktailID) {
                 addCocktailHTML(imagePath, name, category, alcohol, glass, ingredients, instruction, measure, linkVideo);
 
             }
-
-        });
+        }).catch(error => {
+        throw(error);
+    });
 }
 
 
@@ -235,7 +255,9 @@ function getCocktailsByIngredient() {
                         }
                     }
                     return false;
-                });
+                }).catch(error => {
+                throw(error);
+            });
         } else {
             resultMessage.innerHTML = ingredientNotFoundMessage;
         }
@@ -398,7 +420,7 @@ function displayRandomSuggest() {
         let randomColor = Math.floor(Math.random() * 16777215).toString(16);
         let randomIndex = getRandomInt(0, ingredientsList.length - 1);
         let randomIngredient = ingredientsList[randomIndex];
-        resultMessage.innerHTML = "Search a cocktail with the field above ! What about <span class='coloredBold'>" + randomIngredient + "</span> ?";
+        resultMessage.innerHTML = suggestionMessage + " <span class='coloredBold'>" + randomIngredient + "</span> ?";
     }
 }
 

@@ -46,7 +46,7 @@ function switchSearch() {
     if (sessionStorage.getItem('pageState') === 'ingredient') {
 
         resultGrid.innerHTML = "";
-        searchButtonTextArea.innerHTML = buttonNamePlaceholder;
+        searchButtonTextArea.innerHTML = buttonIngredientPlaceholder;
         searchBarText.placeholder = searchBarNamePlaceholder;
         resultMessageArea.innerHTML = resultMessagePlaceholder;
 
@@ -56,7 +56,7 @@ function switchSearch() {
     else if (sessionStorage.getItem('pageState') === 'name') {
 
         resultGrid.innerHTML = "";
-        searchButtonTextArea.innerHTML = buttonIngredientPlaceholder;
+        searchButtonTextArea.innerHTML = buttonNamePlaceholder;
         searchBarText.placeholder = searchBarIngredientPlaceholder;
         searchButton.setAttribute('onclick','getCocktailsByIngredient()')
         sessionStorage.setItem('pageState', 'ingredient');

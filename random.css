@@ -143,7 +143,10 @@ body {
     margin-bottom: 2%;
 }
 
+.result-element-ingredient-image {
+    height: 1em;
 
+}
 .result-element-alcohol {
     font-size: 0.9em;
     font-style: italic;
